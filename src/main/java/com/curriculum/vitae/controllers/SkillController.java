@@ -20,6 +20,7 @@ import com.curriculum.vitae.services.SkillService;
 @RequestMapping(path = "/skill")
 public class SkillController {
 
+	
 	private SkillService skillService;
 	
 	@Autowired
