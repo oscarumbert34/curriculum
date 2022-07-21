@@ -3,6 +3,7 @@ package com.curriculum.vitae.controllers;
 import com.curriculum.vitae.dtos.CurriculumDTO;
 import com.curriculum.vitae.dtos.PersonalInformationDTO;
 import com.curriculum.vitae.facade.CurriculumVitaeFacade;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,6 +24,7 @@ public class CurriculumController {
         this.curriculumVitaeFacade = curriculumVitaeFacade;
     }
 
+    @Operation(summary = "Este metodo obtiene todo el CV completo")
     @GetMapping(value = "/document-number/{documentNumber}", produces = { MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<CurriculumDTO> findByDocumentNumber(@PathVariable String documentNumber) {
 

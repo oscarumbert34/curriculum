@@ -3,6 +3,7 @@ package com.curriculum.vitae.controllers;
 import java.util.List;
 
 import com.curriculum.vitae.services.ServiceGeneric;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -41,7 +42,8 @@ public class WorkExperienceController {
 		
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(workExperienceService.findLast());
 	}
-	
+
+	@Operation(summary = "Obtiene todas las experiencias laborales desde la ultima hasta la primera")
 	@GetMapping(value = "/all", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<WorkExperienceDTO>> findAll() {
 		
