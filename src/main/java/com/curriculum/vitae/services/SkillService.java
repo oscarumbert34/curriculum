@@ -1,19 +1,12 @@
 package com.curriculum.vitae.services;
 
+import com.curriculum.vitae.dtos.SkillDTO;
+import com.curriculum.vitae.exceptions.TransactionException;
+
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+public interface SkillService {
+    public void save(List<SkillDTO> entities) throws TransactionException;
 
-import com.curriculum.vitae.dtos.SkillDTO;
-
-@Service
-public class SkillService {
-
-	public void save(SkillDTO skillDTO) {
-		
-	}
-	
-	public List<SkillDTO> findAll(){
-		return null;
-	}
+    public List<SkillDTO> findAll();
 }

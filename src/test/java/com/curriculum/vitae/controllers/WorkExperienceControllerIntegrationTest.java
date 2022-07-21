@@ -30,30 +30,18 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 @AutoConfigureMockMvc
 @SpringBootTest(classes = { VitaeApplication.class })
-public class WorkExperienceControllerIntegrationTest {
+class WorkExperienceControllerIntegrationTest extends TestController{
 
 	@Autowired
 	private MockMvc mockMvc;
-
-	private ObjectMapper mapper;
-
-	//@Mock
-	private WorkExperienceService workExperienceService;
- 
-	//@InjectMocks
-	private WorkExperienceController workExperienceController;
 	
 	@BeforeEach
 	public void setUp() {
-		///mockMvc = MockMvcBuilders.standaloneSetup(workExperienceController).setControllerAdvice(new Handler()).build();
-		mapper = new ObjectMapper().findAndRegisterModules().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-				.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, false)
-				.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-		//workExperienceController = new WorkExperienceController(workExperienceService);
+		this.init();
 	}
 	
 	@Test
-	public void whenTest() throws JsonProcessingException, Exception {
+	void whenTest() throws JsonProcessingException, Exception {
 		WorkExperienceDTO workExperienceDTO = WorkExperienceDTO.builder().description("dfsdf")
 				.state("FINALIZE").business("T4T").description("dsafsd").endDate(LocalDate.now())
 				.initDate(LocalDate.now()).job("").build();
@@ -64,10 +52,6 @@ public class WorkExperienceControllerIntegrationTest {
 		String response = result.getResponse().getContentAsString();
 				
 		//workExperienceController.findAll();
-	}
-	
-	private String toJson(final Object obj) throws JsonProcessingException {
-		return mapper.writeValueAsString(obj);
 	}
 	
 }

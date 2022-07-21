@@ -1,8 +1,7 @@
 package com.curriculum.vitae.services;
 
-import org.springframework.stereotype.Service;
+import com.curriculum.vitae.dtos.EducationDTO;
+import com.curriculum.vitae.services.ServiceGeneric;
 
-@Service
-public class EducationService {
-
+public interface EducationService extends ServiceGeneric<EducationDTO> {
 }

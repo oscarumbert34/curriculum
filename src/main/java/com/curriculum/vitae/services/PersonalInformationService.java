@@ -1,8 +1,8 @@
 package com.curriculum.vitae.services;
 
-import org.springframework.stereotype.Service;
+import com.curriculum.vitae.dtos.PersonalInformationDTO;
 
-@Service
-public class PersonalInformationService {
-
+public interface PersonalInformationService {
+    void save(PersonalInformationDTO personalInformationDTO);
+    PersonalInformationDTO findByDocumentNumber(String documentNumber);
 }

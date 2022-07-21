@@ -29,18 +29,13 @@ import com.curriculum.vitae.exceptions.ValidationError;
 import com.curriculum.vitae.handler.Handler;
 import com.curriculum.vitae.services.WorkExperienceService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
 
 @EnableWebMvc
 @ExtendWith(MockitoExtension.class)
-class WorkExperienceControllerTest {
+class WorkExperienceControllerTest extends TestController{
 
 	private MockMvc mockMvc;
-
-	private ObjectMapper mapper;
 	
 	@Mock
 	private WorkExperienceService workExperienceService;
@@ -51,9 +46,7 @@ class WorkExperienceControllerTest {
 	@BeforeEach
 	public void setUp() {
 		mockMvc = MockMvcBuilders.standaloneSetup(workExperienceController).setControllerAdvice(new Handler()).build();
-		mapper = new ObjectMapper().findAndRegisterModules().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-				.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, false)
-				.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+		this.init();
 		
 	}
 	
@@ -108,19 +101,8 @@ class WorkExperienceControllerTest {
 				Arguments.of(workExperienceDTO9, "description", "must not be blank"),
 				Arguments.of(workExperienceDTO10, "description", "must not be blank"));
 	}
-	private String toJson(final Object obj) throws JsonProcessingException {
-		return mapper.writeValueAsString(obj);
-	}
-	
-	private static WorkExperienceDTO createDto() {
-		return WorkExperienceDTO.builder().description("dfsdf").business("T4T")
-				.endDate(LocalDate.now()).job("Desarrollador Java").state("ACTUALLY")
-				.initDate(LocalDate.now()).build();
-	}
-	
-	
 	private ErrorResponse toObject(final String json) throws JsonProcessingException {
-		ErrorResponse errorResponse =  mapper.readValue(json, ErrorResponse.class);
+		ErrorResponse errorResponse =  this.getMapper().readValue(json, ErrorResponse.class);
 		List<ValidationError> validationErrors = errorResponse.getFieldErrors().stream()
 				.distinct().collect(Collectors.toList());
 		errorResponse.setValidationErrors(validationErrors);

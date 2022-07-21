@@ -31,8 +31,8 @@ public class SkillController {
 	
 	@PostMapping(value = "", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<String> save(
-			@RequestBody @Validated SkillDTO skillDTO) {
-		skillService.save(skillDTO);
+			@RequestBody @Validated List<SkillDTO> skillDTOS) {
+		skillService.save(skillDTOS);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("OK");
 	}
 	

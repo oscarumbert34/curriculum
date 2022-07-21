@@ -3,23 +3,18 @@ package com.curriculum.vitae.models;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "work_experience")
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class WorkExperience {
 
 	@Id
@@ -32,7 +27,12 @@ public class WorkExperience {
 	private String job;
 	private LocalDate initDate;
 	private LocalDate endDate;
+
+	@Column(name = "state", nullable = false)
+	@Enumerated(EnumType.STRING)
 	private State state;
+
+	@Column(columnDefinition = "LONGTEXT")
 	private String description;
 	
 }
