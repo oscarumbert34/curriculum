@@ -38,4 +38,4 @@ public class SkillServiceImpl implements SkillService {
 
         return Mapper.mapSkillsToSkillDTOs(skillRepository.findAll());
     }
-}vbuN3gAxtGr443a
+}
